@@ -49,7 +49,7 @@ for CELL_SIZE in [16]:
             #model.add(Dense(CELL_SIZE, kernel_regularizer=regularizers.l1_l2(l1=0.001, l2=0.001), activation='relu', input_shape=input_shape))
             #model.add(MaxPooling2D(pool_size=(2, 2)))
             model.add(MaxPooling1D(pool_size=2))
-            #model.add(Dropout(0.4))
+            model.add(Dropout(0.2))
 
             # Conv Layer 2
             model.add(Conv1D(CELL_SIZE,  kernel_size=3))#, activation='relu'
@@ -57,7 +57,7 @@ for CELL_SIZE in [16]:
             model.add(Activation('relu'))
             #model.add(Dense(CELL_SIZE, kernel_regularizer=regularizers.l1_l2(l1=0.001, l2=0.001),  activation='relu'))
             model.add(MaxPooling1D(pool_size=2))
-            #model.add(Dropout(0.4))
+            #model.add(Dropout(0.2))
 
             # Conv Layer 3
             model.add(Conv1D(CELL_SIZE,  kernel_size=3))#, activation='relu'
@@ -65,7 +65,7 @@ for CELL_SIZE in [16]:
             model.add(Activation('relu'))
             #model.add(Dense(CELL_SIZE,  kernel_regularizer=regularizers.l1_l2(l1=0.001, l2=0.001), activation='relu'))
             model.add(MaxPooling1D(pool_size=2))
-            #model.add(Dropout(0.4))
+            #model.add(Dropout(0.2))
 
             # Conv Layer 4
             #model.add(Conv1D(CELL_SIZE, kernel_size=2, activation='relu'))
@@ -109,10 +109,10 @@ for CELL_SIZE in [16]:
             #model.add(Dropout(0.2))
 
             # Output Layer
-            model.add(Dense(2, activation='softmax'))#sigmoid
+            model.add(Dense(2, activation='sigmoid'))#softmax
 
-            #optimizer = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-            optimizer = SGD(lr=0.05)
+            optimizer = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+            #optimizer = SGD(lr=0.05)
             model.compile(loss='sparse_categorical_crossentropy',
                           optimizer=optimizer,
                           metrics=['acc', km.sparse_categorical_f1_score(),
